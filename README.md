@@ -7,8 +7,8 @@ Welcome to Akirix! We are excited to have you onboard. So now you have gotten al
 Before we get into the details, a few things you should keep in mind about Akirix:
 
 * We don't want rock stars, but looking to build a great team. You are expected to bear you load as well as others' when needed.   
-* Your idea is valuable. There are no dumb questions or suggestions. Feel free to speak up.
-* Make mistakes. The fear of making mistakes kills creativity.
+* Your ideas are valuable. There are no dumb questions or suggestions. Just speak up.
+* Do make mistakes. The fear of making mistakes kills creativity.
 
 ## Things You Will Need
 
@@ -21,19 +21,17 @@ These are the basic things you will need. See your supervisor about obtaining th
 * [IntelliJ Ultimate](https://www.jetbrains.com/idea/)
 * [Tower Git Client](http://www.git-tower.com/)
 * [XCode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
-* [Node.js](https://nodejs.org)
-* [YUIDoc](http://yui.github.io/yuidoc/) Javascript Documentation tool
-* [Homebew](http://brew.sh/)
 
 
 ## Things You Should Know
 
 Here are the basics you should already know.
 
-* [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development)). The team depends on SCRUM. Get a SCRUM book from your supervisor if you haven't.
+* [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development)). The team depends on SCRUM to get things done. Get a copy of the SCRUM book from your supervisor if you have not yet got one.
 * Version control with Git. [Pro Git](https://git-scm.com/book/en/v2) is a free book you can download.
 * Understand how package management system works. Such as NPM, Bower, Ruby Gems.
-* [Markdown Syntax](https://github.com/gitlabhq/gitlabhq/blob/master/doc/markdown/markdown.md)
+* [Markdown Syntax](https://guides.github.com/features/mastering-markdown/)
+* [YUIDoc](http://yui.github.io/yuidoc/)
 
 ## Coding Style
 To make your life easier, the coding style settings for IntelliJ can be found under _**Settings/IntelliJ/coding_style.jar**_. You can import the file directly into IntelliJ.
