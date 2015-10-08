@@ -1,4 +1,6 @@
-# Akirix Developer Getting Started Guide
+![Akirix.com](https://raw.githubusercontent.com/Akirix/dev-getting-started/master/assets/img/logo-gradient-sm.png)
+
+# Developer Getting Started Guide
 
 ## Welcome!
 
