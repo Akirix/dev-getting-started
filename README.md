@@ -2,12 +2,19 @@
 
 ## Welcome!
 
+Welcome to Akirix! We are excited to have you onboard. So now you have gotten all the paperwork taken care of, let's get down to business. This guide is here to help you get started as a developer so you can quickly integrate into our development team.
+
+Before we get into the details, a few things you should keep in mind about Akirix:
+
+* We don't want rock stars, but looking to build a great team. You are expected to bear you load as well as others' when needed.   
+* Your idea is valuable. There are no dumb questions or suggestions. Feel free to speak up.
+* Make mistakes. The fear of making mistakes kills creativity.
 
 ## Things You Will Need
 
 These are the basic things you will need. See your supervisor about obtaining the neccesary accounts and licenses.
 
-* A computer (DUH!)
+* A Mac
 * Akirix E-mail account
 * Akirix Git repository account
 * [Slack](https://itunes.apple.com/us/app/slack/id803453959?mt=12) account. Download the Slack app from Mac App Store
