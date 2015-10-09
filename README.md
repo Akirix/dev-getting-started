@@ -19,7 +19,7 @@ These are the basic things you will need. See your supervisor about obtaining th
 * A Mac
 * Akirix E-mail account
 * Akirix Git repository account
-* [Slack](https://itunes.apple.com/us/app/slack/id803453959?mt=12) account. Download the Slack app from Mac App Store
+* [Slack](https://itunes.apple.com/us/app/slack/id803453959?mt=12). Download the app and ask your supervisor for an invite.
 * [IntelliJ Ultimate](https://www.jetbrains.com/idea/)
 * [Tower Git Client](http://www.git-tower.com/)
 * [XCode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
