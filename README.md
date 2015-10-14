@@ -31,6 +31,7 @@ Here are the basics you should already know.
 
 * [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development)). The team depends on SCRUM to get things done. Get a copy of the SCRUM book from your supervisor if you have not yet got one.
 * Version control with Git. [Pro Git](https://git-scm.com/book/en/v2) is a free book you can download.
+* Understand [REST API](http://www.restapitutorial.com/)
 * Understand how package management system works. Such as NPM, Bower, Ruby Gems.
 * [Markdown Syntax](https://guides.github.com/features/mastering-markdown/)
 * [YUIDoc](http://yui.github.io/yuidoc/)
