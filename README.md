@@ -61,7 +61,8 @@ function foo( x, y, z ){
             }
             var c = j > 5 ? "GT 5" : "LE 5";
         }
-    } else{
+    } 
+    else{
         var j = 0;
         try{
             while( j < 10 ){
@@ -74,9 +75,11 @@ function foo( x, y, z ){
             do{
                 j--;
             } while( j > 0 )
-        } catch( e ){
+        } 
+        catch( e ){
             alert( "Failure: " + e.message );
-        } finally{
+        } 
+        finally{
             reset( a, i );
         }
     }
