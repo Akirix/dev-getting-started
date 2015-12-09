@@ -45,7 +45,7 @@ Here are the basics you should already know.
 
 
 ## Coding Style
-To make your life easier, the coding style settings for IntelliJ can be found under _**Settings/IntelliJ/coding_style.jar**_. You can import the file directly into IntelliJ.
+To make your life easier, the coding style settings for IntelliJ can be found under _**settings/IntelliJ/coding_style.jar**_. You can import the file directly into IntelliJ.
  
 Below is an example Javascript snippet of the style:
   
