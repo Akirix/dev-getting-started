@@ -4,11 +4,11 @@
 
 ## Welcome!
 
-Welcome to Akirix! We are excited to have you onboard. So now you have gotten all the paperwork taken care of, let's get down to business. This guide is here to help you get started as a developer so you can quickly integrate into our development team.
+Welcome to Akirix! We are excited to have you aboard. So now you have gotten all the paperwork taken care of, let's get down to business. This guide is here to help you get started as a developer so you can quickly integrate into our development team.
 
 Before we get into the details, a few things you should keep in mind about Akirix:
 
-* We don't want rock stars, but looking to build a great team. You are expected to bear you load as well as others' when needed.   
+* We want rock stars, what's more important to us is a great team.   
 * Your ideas are valuable. There are no dumb questions or suggestions. Just speak up.
 * Do make mistakes. The fear of making mistakes kills creativity.
 
@@ -20,7 +20,7 @@ These are the basic things you will need. See your supervisor about obtaining th
 * Akirix E-mail account
 * Akirix Git repository account
 * [Slack](https://itunes.apple.com/us/app/slack/id803453959?mt=12). Download the app and ask your supervisor for an invite.
-* [IntelliJ Ultimate](https://www.jetbrains.com/idea/)
+* [IntelliJ Ultimate 14](https://download.jetbrains.com/idea/ideaIU-14.1.5.dmg)
 * [Tower Git Client](http://www.git-tower.com/)
 * [XCode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 
@@ -35,6 +35,14 @@ Here are the basics you should already know.
 * Understand how package management system works. Such as NPM, Bower, Ruby Gems.
 * [Markdown Syntax](https://guides.github.com/features/mastering-markdown/)
 * [YUIDoc](http://yui.github.io/yuidoc/)
+* [APIDoc](http://apidocjs.com/)
+
+## SCRUM & Development Cycle
+
+* Sprint lenght is 2 weeks
+* Thursday Code Review
+* Friday Retrospective
+
 
 ## Coding Style
 To make your life easier, the coding style settings for IntelliJ can be found under _**Settings/IntelliJ/coding_style.jar**_. You can import the file directly into IntelliJ.
@@ -69,7 +77,7 @@ function foo( x, y, z ){
                 if( i == j || j > 5 ){
                     a[ j ] = i + j * 12;
                 }
-                i = (j << 2) & 4;
+                i = ( j << 2 ) & 4;
                 j++;
             }
             do{
@@ -88,8 +96,15 @@ function foo( x, y, z ){
  
 ## Documentation / Comments
 
-We use [YUIDoc](http://yui.github.io/yuidoc/syntax/index.html) for documentation generation. 
+We use [YUIDoc](http://yui.github.io/yuidoc/syntax/index.html) and [APIDoc](http://apidocjs.com/) for documentation generation. 
 
+### YUIDoc
+
+Things to keep in mind when writing YUIDocs:
+
+* Think from the perspective of a newly hired Akirix developer who is trying to learn our program.
+* Focus on how things work under the hood
+  
 Each source file should have the following comments if applicable:
 
 * Overall description of the file
@@ -189,7 +204,55 @@ function forEach(iterable, cb) {
 }
 ```
 
-## Testing
-TBD
+### APIDoc
 
+APIDoc is used to generate public API documentations. Things to keep in mind while writing API docs:
+
+* Think from the perspective of someone who does not work for Akirix but wants to utilize our public API.
+* What are the input parameters? What are required and what are optional?
+* What are the outputs? 
+* What are the possible HTTP Status codes?
+* What are the error messages may be returned?
+* Give some examples if necessary
+
+
+**@api**
+For the description part, things should follow the examples below. Description is based on the HTTP method and the endpoints.
+
+```
+POST /users          -> @api {post} /users Create a user
+GET /users           -> @api {get} /users Retrieve all users
+GET /users/:user_id  -> @api {get} /users/: user_id Retrieve a user
+PUT /users/:user_id  -> @api {put} /users/: user_id Update a user
+DEL /users/:user_id  -> @api {del} /users/:user_id Delete a user
+```
+
+Although above rule will cover most of the API calls, but not all. In other cases, use a short description. For example:
+
+```
+GET /accounts/:account_id/download   -> Download Account transactions
+POST /invoices/:invoice_id/markPaid    -> Mark invoice paid
+```
+
+**@apiName**
+It's derived directly from function names. Example:
+
+```
+accounts.js/exports.index -> @apiName AccountsIndex
+documents.js/exports.checkPermissions -> @apiName DocumentsCheckPermissions
+```
+
+**@apiParam**
+There are two types of parameters can be submitted in a request: query params and request body params. Make sure you cover both types.
+
+For example. The user_id below is a query param while the entire JSON payload is the request body param.
+
+```javascript
+POST /users/:user_id 
+{
+     first_name: XXX
+     last_name: XXXX
+     email: XXXX
+}
+```
 
