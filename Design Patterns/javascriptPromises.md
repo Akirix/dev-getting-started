@@ -2,27 +2,6 @@
 
 ## Javascript Promises
 
-#### What is a Javascript Promise?
-
-A promise is a representation of the result to an asynchronous operation. It acts as a placeholder until there is a successful or failed result. 
-
-A promise has three different states:
-* pending - The initial state of a promise.
-* fulfilled - The state of a promise representing a successful operation.
-* rejected - The state of a promise representing a failed operation.
-
-Once a promise is fulfilled or rejected, it is immutable (i.e. it can never change again).
-
-Using .then is a promise as well as calling new Promise.
-
-Refer to [Mozilla Developer Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) for more information. 
-
-#### Why use Promises?
-
-Promises provide a simple alternative for executing, composing, and managing asynchronous operations when compared to traditional callback-based approaches. 
-When there are too many callback your code will end up in a callback hell.
-
-
 #### What is Callback Hell? 
 
 The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom (line by line).
@@ -33,24 +12,25 @@ Refer to [callbackhell.com](http://callbackhell.com/) for more information.
 #### Callback Hell Example
 
 ```javascript
-
 exports.create = function( req, res, next ){
 
+    var foundRecipe;
     Recipe.find( {
         where: {
             flavor: req.params.cake.flavor,
             serving_size: req.params.cake.size
         }
     } ).then( function( recipe ){
+        foundRecipe = recipe;
         Ingredients.findAll( {
             where: {
-                ingredient: recipe.ingredient
+                ingredient: foundRecipe.ingredient
             }
         } ).then( function( ingredients ){
             var cake = {
                 ingredients: ingredients,
-                flavor: recipe.flavor,
-                bake_time: recipe.time
+                flavor: foundRecipe.flavor,
+                bake_time: foundRecipe.time
             };
 
             Cake.create( cake ).then( function( cake ){
@@ -88,6 +68,8 @@ We want to avoid Callback hell by utilizing promises in the correct way.
 ```javascript
 exports.create = function( req, res, next ){
 
+    var foundRecipe;
+
     Recipe.find( {
         where: {
             flavor: req.params.cake.flavor,
@@ -95,17 +77,18 @@ exports.create = function( req, res, next ){
         }
     } )
         .then( function( recipe ){
+            foundRecipe = recipe;
             return Ingredients.findAll( {
                 where: {
-                    ingredient: recipe.ingredient
+                    ingredient: foundRecipe.ingredient
                 }
             } );
         } )
         .then( function( ingredients ){
             var cake = {
                 ingredients: ingredients,
-                flavor: recipe.flavor,
-                bake_time: recipe.time
+                flavor: foundRecipe.flavor,
+                bake_time: foundRecipe.time
             };
             return Cake.create( cake );
         } )
@@ -119,12 +102,11 @@ exports.create = function( req, res, next ){
             return next();
         } )
         .catch( function( err ){
-        console.log( err );
-        return next();
-    } );
+            console.log( err );
+            return next();
+        } );
 };
 ```
-
 
 #### How to correctly write a Javascript Promise
 
@@ -135,9 +117,14 @@ You can use any of these methods to return, resolve, or even reject a promise
 * return 2;
 * return new Promise (resolve, reject){ resolve(2)};
  
- .then will ALWAYS return the previous return result. It will not return anything above that return. 
+ .then will ALWAYS return the previous return result. It will not return anything above that return.
+  
+From this you can see that a recipe variable is initialized before any of the promises return. That is so the recipe that is found can be used in 
+promises that are further down the promises chain from where it was initially found. 
+  
+#### How to Use .catch Correctly 
 
-Using .catch is the way to catch errors from a Promise. .catch will only catch the errors that are on the same level as the .then.
+Using .catch is a way to catch errors from a Promise. .catch will only catch the errors that are on the same level as the .then.
 If it is outside or nested in another level from the .then you will have to add another catch statement. 
 
 Check out this example of baking a cake.
@@ -148,6 +135,8 @@ Check out this example of baking a cake.
 ```javascript
   exports.create = function( req, res, next ){
   
+      var foundRecipe;
+  
       Recipe.find( {
           where: {
               flavor: req.params.cake.flavor,
@@ -155,17 +144,18 @@ Check out this example of baking a cake.
           }
       } )
           .then( function( recipe ){
+              foundRecipe = recipe;
               return Ingredients.findAll( {
                   where: {
-                      ingredient: recipe.ingredient
+                      ingredient: foundRecipe.ingredient
                   }
               } );
           } )
           .then( function( ingredients ){
               var cake = {
                   ingredients: ingredients,
-                  flavor: recipe.flavor,
-                  bake_time: recipe.time
+                  flavor: foundRecipe.flavor,
+                  bake_time: foundRecipe.time
               };
   
               if( cake.flavor === "Chocolate" ){
@@ -209,6 +199,9 @@ You need to add a catch statement onto the promise chain that is within the if s
 ```javascript
    exports.create = function( req, res, next ){
    
+       var foundRecipe;
+       ;
+   
        Recipe.find( {
            where: {
                flavor: req.params.cake.flavor,
@@ -216,17 +209,18 @@ You need to add a catch statement onto the promise chain that is within the if s
            }
        } )
            .then( function( recipe ){
+               foundRecipe = recipe;
                return Ingredients.findAll( {
                    where: {
-                       ingredient: recipe.ingredient
+                       ingredient: foundRecipe.ingredient
                    }
                } );
            } )
            .then( function( ingredients ){
                var cake = {
                    ingredients: ingredients,
-                   flavor: recipe.flavor,
-                   bake_time: recipe.time
+                   flavor: foundRecipe.flavor,
+                   bake_time: foundRecipe.time
                };
    
                if( cake.flavor === "Chocolate" ){
@@ -268,13 +262,63 @@ You need to add a catch statement onto the promise chain that is within the if s
 
 #### Terminating a Promise Early
 
-Looking back to the original baking a cake function, what if there are no ingredients, then what should the program do. 
+Looking back to the original baking a cake function, what if there are no ingredients, then what should the program do?
+ 
+ 
+ ```javascript
+ exports.create = function( req, res, next ){
+ 
+     var foundRecipe;
+     Recipe.find( {
+         where: {
+             flavor: req.params.cake.flavor,
+             serving_size: req.params.cake.size
+         }
+     } )
+         .then( function( recipe ){
+             foundRecipe = recipe;
+             return Ingredients.findAll( {
+                 where: {
+                     ingredient: foundRecipe.ingredient
+                 }
+             } );
+         } )
+         .then( function( ingredients ){
+             var cake = {
+                 ingredients: ingredients,
+                 flavor: foundRecipe.flavor,
+                 bake_time: foundRecipe.time
+             };
+             return Cake.create( cake );
+         } )
+         .then( function( cake ){
+             cake.frosting = req.params.cake.frosting;
+             return cake.save();
+         } )
+         .then( function(){
+             console.log( 'Now time to eat the cake' );
+             res.send( 200, { cake: cake } );
+             return next();
+         } )
+         .catch( function( err ){
+             console.log( err );
+             return next();
+         } );
+ };
+ ```
+
+ 
+ 
 You would want the program to terminate early because it does not have the necessary ingredients to bake the cake. 
 Here is an example of how one would handle that case. 
+
+
+
 
 ```javascript
 exports.create = function( req, res, next ){
 
+    var foundRecipe;
     Recipe.find( {
         where: {
             flavor: req.params.cake.flavor,
@@ -282,15 +326,16 @@ exports.create = function( req, res, next ){
         }
     } )
         .then( function( recipe ){
+            foundRecipe = recipe
             return Ingredients.findAll( {
                 where: {
-                    ingredient: recipe.ingredient
+                    ingredient: foundRecipe.ingredient
                 }
             } );
         } )
         .then( function( ingredients ){
             if( ingredients ){
-                return this.bakeCake( ingredients )
+                return this.bakeCake( foundRecipe, ingredients )
             }
             else{
                 return ingredients
@@ -301,7 +346,7 @@ exports.create = function( req, res, next ){
             return next();
         } );
 };
-exports.bakeCake = function( ingredients ){
+exports.bakeCake = function( recipe, ingredients ){
     var cake = {
         ingredients: ingredients,
         flavor: recipe.flavor,
