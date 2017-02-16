@@ -33,72 +33,239 @@ Refer to [callbackhell.com](http://callbackhell.com/) for more information.
 #### Callback Hell Example
 
 ```javascript
-function buildHouse(){
-    var foundation = 'Concrete';
-    var frame = 'Frame';
-    var roof = 'Shingles';
-    var walls = 'Sheet and paint';
-    var doorsAndWindows = 'Doors and Windows';
-    
-    console.log( 'Need to pour foundation first' );
-    foundation.save().then( function(){
-        console.log( 'Next, its needs framing' );
-        frame.save().then( function(){
-            console.log( 'Needs a roof' );
-            roof.save().then( function(){
-                console.log( 'Finish up the insides with the walls' );
-                walls.save().then( function(){
-                    console.log( 'And at last put in the windows and doors' );
-                    doorsAndWindows.save().then( function(){
-                        console.log( 'The house has been built' );
-                    } )
-                } )
-            } )
-        } )
-    } )
-}
+
+exports.create = function( req, res, next ){
+
+    Recipe.find( {
+        where: {
+            flavor: req.params.cake.flavor,
+            serving_size: req.params.cake.size
+        }
+    } ).then( function( recipe ){
+        Ingredients.findAll( {
+            where: {
+                ingredient: recipe.ingredient
+            }
+        } ).then( function( ingredients ){
+            var cake = {
+                ingredients: ingredients,
+                flavor: recipe.flavor,
+                bake_time: recipe.time
+            };
+
+            Cake.create( cake ).then( function( cake ){
+                cake.frosting = req.params.cake.frosting;
+
+                cake.save().then( function(){
+                    console.log( 'Now time to eat the cake' );
+                    res.send( 200, { cake: cake } );
+                    return next();
+                } ).catch( function( err ){
+                    console.log( err );
+                    return next();
+                } );
+            } ).catch( function( err ){
+                console.log( err );
+                return next();
+            } );
+        } ).catch( function( err ){
+            console.log( err );
+            return next();
+        } );
+    } ).catch( function( err ){
+        console.log( err );
+        return next();
+    } );
+
+};
+
 ```
 
 We want to avoid Callback hell by utilizing promises in the correct way. 
 
+#### Callback Written as a Promise
+
+```javascript
+exports.create = function( req, res, next ){
+
+    Recipe.find( {
+        where: {
+            flavor: req.params.cake.flavor,
+            serving_size: req.params.cake.size
+        }
+    } )
+        .then( function( recipe ){
+            return Ingredients.findAll( {
+                where: {
+                    ingredient: recipe.ingredient
+                }
+            } );
+        } )
+        .then( function( ingredients ){
+            var cake = {
+                ingredients: ingredients,
+                flavor: recipe.flavor,
+                bake_time: recipe.time
+            };
+            return Cake.create( cake );
+        } )
+        .then( function( cake ){
+            cake.frosting = req.params.cake.frosting;
+            return cake.save();
+        } )
+        .then( function(){
+            console.log( 'Now time to eat the cake' );
+            res.send( 200, { cake: cake } );
+            return next();
+        } )
+        .catch( function( err ){
+        console.log( err );
+        return next();
+    } );
+};
+```
+
+
 #### How to correctly write a Javascript Promise
 
-Using .catch is the way to catch erros from a Promise. .catch will only catch the errors that are on the same level as the .then.
-If it is outside or nested in another level from the .then you will have to add another catch statement. 
-
-You will wrap your code into a new Promise if the result is not a promise. If it is a premise you will just return that promise. 
+You will wrap your code into a new Promise if the returned result is not a promise. If it is a premise you will just return that promise. 
 
 You can use any of these methods to return, resolve, or even reject a promise 
-* return Promise.rejct(2)
+* return Promise.reject(2)
 * return 2;
 * return new Promise (resolve, reject){ resolve(2)};
-
-
  
  .then will ALWAYS return the previous return result. It will not return anything above that return. 
 
+Using .catch is the way to catch errors from a Promise. .catch will only catch the errors that are on the same level as the .then.
+If it is outside or nested in another level from the .then you will have to add another catch statement. 
 
-#### Javascript Promise Example 
+
+.catch examples (return at the correct place)
+
+#### .catch written incorrect Example 
 
 ```javascript
-   exports.test = function( req, res, next ){
-       var errors = [];
-       Promise.resolve().then( function(){
-           console.log( 0 );
-       } ).then( function(){
-           console.log( 1 );
-           return next();
-       } ).then( function(){
-           console.log( 2 );
-           throw 'things';
-       } ).then( function(){
-           console.log( 3 );
-       } ).then( function(){
-           console.log( 4 );
-       } ).catch( function( err ){
-           console.log( err );
-           res.send( 200, {} );
-           return next();
-       } );
+  exports.create = function( req, res, next ){
+  
+      Recipe.find( {
+          where: {
+              flavor: req.params.cake.flavor,
+              serving_size: req.params.cake.size
+          }
+      } )
+          .then( function( recipe ){
+              return Ingredients.findAll( {
+                  where: {
+                      ingredient: recipe.ingredient
+                  }
+              } );
+          } )
+          .then( function( ingredients ){
+              var cake = {
+                  ingredients: ingredients,
+                  flavor: recipe.flavor,
+                  bake_time: recipe.time
+              };
+  
+              if( cake.flavor === "Chocolate" ){
+  
+                  var milk = {
+                      type: 1 //whole milk
+                  };
+  
+                  Milk.create( milk ).then( function(){
+                      var ice_cream = {
+                          flavor: 'vanilla'
+                      };
+  
+                      return IceCream.create( ice_cream );
+                  } )
+              }
+  
+              return Cake.create( cake );
+          } )
+          .then( function( cake ){
+              cake.frosting = req.params.cake.frosting;
+  
+              return cake.save();
+          } )
+          .then( function(){
+              console.log( 'Now time to eat the cake' );
+              res.send( 200, { cake: cake } );
+              return next();
+          } )
+          .catch( function( err ){
+              console.log( err );
+              return next();
+          } );
+  };
+```
+
+You need to add a catch statement onto the promise chain that is within the if statement. See next example.
+
+#### .catch written correct Example 
+
+```javascript
+   exports.create = function( req, res, next ){
+   
+       Recipe.find( {
+           where: {
+               flavor: req.params.cake.flavor,
+               serving_size: req.params.cake.size
+           }
+       } )
+           .then( function( recipe ){
+               return Ingredients.findAll( {
+                   where: {
+                       ingredient: recipe.ingredient
+                   }
+               } );
+           } )
+           .then( function( ingredients ){
+               var cake = {
+                   ingredients: ingredients,
+                   flavor: recipe.flavor,
+                   bake_time: recipe.time
+               };
+   
+               if( cake.flavor === "Chocolate" ){
+   
+                   var milk = {
+                       type: 1 //whole milk
+                   };
+   
+                   Milk.create( milk ).then( function(){
+                       var ice_cream = {
+                           flavor: 'vanilla'
+                       };
+   
+                       return IceCream.create( ice_cream );
+                   } ).catch( function( err ){
+                       console.log( err );
+                       return next();
+                   } )
+               }
+   
+               return Cake.create( cake );
+           } )
+           .then( function( cake ){
+               cake.frosting = req.params.cake.frosting;
+   
+               return cake.save();
+           } )
+           .then( function(){
+               console.log( 'Now time to eat the cake' );
+               res.send( 200, { cake: cake } );
+               return next();
+           } )
+           .catch( function( err ){
+               console.log( err );
+               return next();
+           } );
    };
 ```
+
+Now how do you terminate a promise early? 
+
+
