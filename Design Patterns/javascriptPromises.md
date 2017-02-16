@@ -140,10 +140,10 @@ You can use any of these methods to return, resolve, or even reject a promise
 Using .catch is the way to catch errors from a Promise. .catch will only catch the errors that are on the same level as the .then.
 If it is outside or nested in another level from the .then you will have to add another catch statement. 
 
+Check out this example of baking a cake.
 
-.catch examples (return at the correct place)
 
-#### .catch written incorrect Example 
+#### Incorrect Use of .catch  
 
 ```javascript
   exports.create = function( req, res, next ){
@@ -204,7 +204,7 @@ If it is outside or nested in another level from the .then you will have to add 
 
 You need to add a catch statement onto the promise chain that is within the if statement. See next example.
 
-#### .catch written correct Example 
+#### Correct Use of .catch  
 
 ```javascript
    exports.create = function( req, res, next ){
@@ -266,6 +266,67 @@ You need to add a catch statement onto the promise chain that is within the if s
    };
 ```
 
-Now how do you terminate a promise early? 
+#### Terminating a Promise Early
+
+Looking back to the original baking a cake function, what if there are no ingredients, then what should the program do. 
+You would want the program to terminate early because it does not have the necessary ingredients to bake the cake. 
+Here is an example of how one would handle that case. 
+
+```javascript
+exports.create = function( req, res, next ){
+
+    Recipe.find( {
+        where: {
+            flavor: req.params.cake.flavor,
+            serving_size: req.params.cake.size
+        }
+    } )
+        .then( function( recipe ){
+            return Ingredients.findAll( {
+                where: {
+                    ingredient: recipe.ingredient
+                }
+            } );
+        } )
+        .then( function( ingredients ){
+            if( ingredients ){
+                return this.bakeCake( ingredients )
+            }
+            else{
+                return ingredients
+            }
+        } )
+        .catch( function( err ){
+            console.log( err );
+            return next();
+        } );
+
+};
+
+exports.bakeCake = function( ingredients ){
+    var cake = {
+        ingredients: ingredients,
+        flavor: recipe.flavor,
+        bake_time: recipe.time
+    };
+    Cake.create( cake )
+        .then( function( cake ){
+            cake.frosting = req.params.cake.frosting;
+            return cake.save();
+        } )
+        .then( function(){
+            console.log( 'Now time to eat the cake' );
+            res.send( 200, { cake: cake } );
+            return next();
+        } )
+        .catch( function( err ){
+            console.log( err );
+            return next();
+        } );
+
+};
+
+```
+
 
 
