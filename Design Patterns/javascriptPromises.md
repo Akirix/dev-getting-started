@@ -300,9 +300,7 @@ exports.create = function( req, res, next ){
             console.log( err );
             return next();
         } );
-
 };
-
 exports.bakeCake = function( ingredients ){
     var cake = {
         ingredients: ingredients,
