@@ -7,7 +7,6 @@
 A promise is a representation of the result to an asynchronous operation. It acts as a placeholder until there is a successful or failed result. 
 
 A promise has three different states:
-
 * pending - The initial state of a promise.
 * fulfilled - The state of a promise representing a successful operation.
 * rejected - The state of a promise representing a failed operation.
@@ -31,7 +30,7 @@ When your code looks like a pyramid on its side, that is essentially call back h
 
 Refer to [callbackhell.com](http://callbackhell.com/) for more information. 
 
-#### Example of callback hell
+#### Callback Hell Example
 
 ```javascript
 function buildHouse(){
@@ -70,7 +69,6 @@ If it is outside or nested in another level from the .then you will have to add 
 You will wrap your code into a new Promise if the result is not a promise. If it is a premise you will just return that promise. 
 
 You can use any of these methods to return, resolve, or even reject a promise 
-
 * return Promise.rejct(2)
 * return 2;
 * return new Promise (resolve, reject){ resolve(2)};
@@ -80,7 +78,7 @@ You can use any of these methods to return, resolve, or even reject a promise
  .then will ALWAYS return the previous return result. It will not return anything above that return. 
 
 
-#### Example of correct Javascript promises 
+#### Javascript Promise Example 
 
 ```javascript
    exports.test = function( req, res, next ){
