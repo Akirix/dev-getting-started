@@ -16,9 +16,7 @@ Once a promise is fulfilled or rejected, it is immutable (i.e. it can never chan
 
 Using .then is a promise as well as calling new Promise.
 
-Refer to this link for more information. 
-
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+Refer to [Mozilla Developer Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) for more information. 
 
 #### Why use Promises?
 
@@ -31,13 +29,11 @@ When there are too many callback your code will end up in a callback hell.
 The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom (line by line).
 When your code looks like a pyramid on its side, that is essentially call back hell. 
 
-Refer to this link for more information. 
-
-* http://callbackhell.com/
+Refer to [callbackhell.com](http://callbackhell.com/) for more information. 
 
 #### Example of callback hell
 
-```language-javascript
+```javascript
 function buildHouse(){
     var foundation = 'Concrete';
     var frame = 'Frame';
@@ -86,7 +82,7 @@ You can use any of these methods to return, resolve, or even reject a promise
 
 #### Example of correct Javascript promises 
 
-```language-javascript
+```javascript
    exports.test = function( req, res, next ){
        var errors = [];
        Promise.resolve().then( function(){
