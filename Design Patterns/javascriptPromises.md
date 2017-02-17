@@ -4,7 +4,7 @@
 
 #### What is Callback Hell? 
 
-The cause of callback hell is when people try to write JavaScript in a way where execution happens visually from top to bottom (line by line).
+The cause of callback hell is when one tries to write JavaScript in a way where execution happens visually from top to bottom or line by line.
 When your code looks like a pyramid on its side, that is essentially call back hell. 
 
 Refer to [callbackhell.com](http://callbackhell.com/) for more information. 
@@ -119,7 +119,7 @@ You can use any of these methods to return, resolve, or even reject a promise
  
  .then will ALWAYS return the previous return result. It will not return anything above that return.
   
-From this you can see that a recipe variable is initialized before any of the promises return. That is so the recipe that is found can be used in 
+With that in mind in the code example above, you can see that a recipe variable is initialized before any of the promises return. That is so the recipe that is found can be used in 
 promises that are further down the promises chain from where it was initially found. 
   
 #### How to Use .catch Correctly 
@@ -277,6 +277,12 @@ Looking back to the original baking a cake function, what if there are no ingred
      } )
          .then( function( recipe ){
              foundRecipe = recipe;
+             // if(ingredients){
+             //
+             // }
+             // else{
+             //
+             // }
              return Ingredients.findAll( {
                  where: {
                      ingredient: foundRecipe.ingredient
@@ -326,7 +332,7 @@ exports.create = function( req, res, next ){
         }
     } )
         .then( function( recipe ){
-            foundRecipe = recipe
+            foundRecipe = recipe;
             return Ingredients.findAll( {
                 where: {
                     ingredient: foundRecipe.ingredient
