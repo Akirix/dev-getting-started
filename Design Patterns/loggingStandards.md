@@ -19,7 +19,7 @@
 | message    | string          |
 | httpMethod    | string          |
 | ip    | string          |
-| user    | object          |
+| user    | object, (no restriction on values)          |
 | records    | array of objects          |
 | data    | object, (no restriction on values)        |
 | file    | string          |
