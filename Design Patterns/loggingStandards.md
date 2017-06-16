@@ -1,5 +1,6 @@
+-----------------------------------------------------------------
 # Akirix Logging Standards (draft)
-
+-----------------------------------------------------------------
 ## Contents
   - [General Potential Properties](#general-potential-properties)
   - [Debug Log Structure](#debug-log-structure)
@@ -8,6 +9,8 @@
   - [Error Log Structure](#error-log-structure)
   - [Critical Log Structure](#critical-log-structure)
   - [Security Log Structure](#security-log-structure)
+-----------------------------------------------------------------
+
 
 ### General Potential Properties
 | Property      | Data-Type     |
@@ -55,7 +58,9 @@
 ```
   
 ### Info Log Structure 
-
+  _General Ideas:_ 
+> Info is to better provide the team successful actions/operations.
+> Info is leveraged for general records, **good-to-know** actions/operations.
 
 
 ### Warning Log Structure 
