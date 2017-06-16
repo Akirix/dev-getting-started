@@ -13,7 +13,7 @@
 | Property      | Data-Type     |
 | ------------- |:-------------:|
 | timestamp   | datetime in utc |
-| level       | string          |
+| level       | string (lowercase)          |
 | endpoint    | string          |
 | callStack    | string          |
 | message    | string          |
@@ -34,6 +34,25 @@
 > Debug's connotation is usually a **neutral** one, while debug may be used in conjuction with other logs; the general premise is neutral.
 > Debug is not intended to be used in production, unless it is needed for one reason or another, then - at that point it will be turned on.
 
+  _Logged File Example Content:_
+  
+```
+  {
+    "timestamp": "2017-06-16 16:13:11",
+    "level": "debug",
+    "message": "Querying for account"
+    "records": null,
+    "data": {
+      "account": {
+        "model": "Account",
+        "model_id": "12456-7890-abcde-fghij"
+      }
+    },
+    "file": "controllers/accounts.js",
+    "function": "view( req, res, next )",
+    "id": "012345679abcdefghijk"
+  }
+```
   
 ### Info Log Structure 
 
