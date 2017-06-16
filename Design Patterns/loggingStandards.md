@@ -1,5 +1,5 @@
 -----------------------------------------------------------------
-# Akirix Logging Standards (draft)
+# Akirix Logging Standards _(draft)_
 -----------------------------------------------------------------
 ## Contents
   - [General Potential Properties](#general-potential-properties)
@@ -62,6 +62,38 @@
 > Info is to better provide the team successful actions/operations.
 > Info is leveraged for general records, **good-to-know** actions/operations.
 
+ _Logged File Example Content:_
+  
+```
+  {
+    "timestamp": "2017-06-16 16:13:11",
+    "level": "info",
+    "message": "Successful query for account"
+    "records": [
+      {
+        "id": "123432-kfsja-293dk-23jkla",
+        "currency_id": "USD",
+        "name": "Awesome USD Account",
+        "type": 0,
+        "status": 1
+      }
+    ],
+    "data": {
+      "account": {
+        "model": "Account",
+        "model_id": "12456-7890-abcde-fghij"
+      }
+    },
+    "user": {
+      "email": "sweetemailaddy@gmail.com",
+      "company_id": "09876-a4b3-cd21e",
+      "id": "1034-cdeb-32as-g922a"
+    },
+    "file": "controllers/accounts.js",
+    "function": "view( req, res, next )",
+    "id": "012345679abcdefghijk"
+  }
+```
 
 ### Warning Log Structure 
 
