@@ -99,7 +99,8 @@
   _General Ideas:_ 
   
 > Warn is basically items that should have attention payed to.
-> Warn is used for 4XX (*400 errors*), items/operations on their way to a 'threshold', and potentially anything else that may need attention before something mayhaps hit a critical state
+> Warn is used for 4XX (*400 errors*), items/operations on their way to a 'threshold', and potentially anything else that may need attention before something mayhaps hit a critical state.
+
  _Logged File Example Content:_
   
 ```
@@ -124,7 +125,91 @@
 ```
 
 ### Error Log Structure 
+  _General Ideas:_ 
+  
+> Error is to represent errors within our code/operations/services.
+> Error should be used for 5XX (*500 errors*).
+> Error should return as much info as possible.
 
+ _Logged File Example Content:_
+  
+```
+  {
+    "timestamp": "2017-06-16 16:13:11",
+    "level": "error",
+    "endpoint": "/fees/:fee_id",
+    "httpMethod": "PUT",
+    "message": "uncaughtException: Validation of Fee failed, Wire must have a default value",
+    "records": null,
+    "data": {
+      "fee": {
+        "id": "zxkv-39ls-40ef-g234",
+        "company_id": "09876-a4b3-cd21e",
+        "fee_data": {
+            "invoice": {
+              "in": 0.0025,
+              "out": 0.0025
+            },
+            "loan": 0.0025,
+            "book_transfer": 0.01,
+            "wire": {
+              "USD": {
+                  "default": {
+                      "speedwire": 20,
+                      "in_ach": 25,
+                      "out_ach": 30,
+                      "in_wire": 25,
+                      "in_percent": 0,
+                      "out_wire": 30,
+                      "out_percent": 0
+                  }
+              },
+              "GBP": {
+                  "default": {
+                      "speedwire": 15,
+                      "in_ach": 27,
+                      "out_ach": 31,
+                      "in_wire": 27,
+                      "in_percent": 0,
+                      "out_wire": 31,
+                      "out_percent": 0
+                  }
+              },
+              "EUR": {
+                  "default": {
+                      "speedwire": 15,
+                      "in_ach": 31,
+                      "out_ach": 36,
+                      "in_wire": 31,
+                      "in_percent": 0,
+                      "out_wire": 36,
+                      "out_percent": 0
+                  }
+              }
+    },
+    "fx": {
+        "0": 0.015,
+        "50001": 0.012,
+        "100001": 0.01
+    }
+}
+      }
+    },
+    "callStack": [
+      "Error: Wire must have a default value", 
+      "at Error (native)", 
+      "at Object.<anonymous> (/Users/yourusername/Dev/uber-api/controllers/uber_tokens.js:1:76)", 
+      "at Module._compile (module.js:409:26)"
+    ]
+    "user": {
+      "email": "uberuser@akirix.com",
+      "id": "4321-cdeb-32as-f922b"
+    },
+    "file": "controllers/fees.js",
+    "function": "update( req, res, next )",
+    "id": "987654321abcdefghijk"
+  }
+```
 
 
 
