@@ -191,9 +191,9 @@
         "0": 0.015,
         "50001": 0.012,
         "100001": 0.01
-    }
-}
+        }
       }
+    }
     },
     "callStack": [
       "Error: Wire must have a default value", 
