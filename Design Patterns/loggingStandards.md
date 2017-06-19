@@ -198,16 +198,18 @@
     "callStack": [
       "Error: Wire must have a default value", 
       "at Error (native)", 
-      "at Object.<anonymous> (/Users/yourusername/Dev/uber-api/controllers/uber_tokens.js:1:76)", 
+      "at Object.<anonymous> (/Users/yourusername/Dev/uber-api/controllers/fees.js:117:17)",
+      "at Object.<anonymous> (/Users/yourusername/Dev/uber-api/models_uber/fee.js:233:29)",
       "at Module._compile (module.js:409:26)"
-    ]
+    ],
+    "ip": "75.148.97.234",
     "user": {
       "email": "uberuser@akirix.com",
       "id": "4321-cdeb-32as-f922b"
     },
     "file": "controllers/fees.js",
     "function": "update( req, res, next )",
-    "id": "987654321abcdefghijk"
+    "id": "239248asdkj23912"
   }
 ```
 
