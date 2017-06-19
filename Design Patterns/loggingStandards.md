@@ -96,8 +96,32 @@
 ```
 
 ### Warning Log Structure 
-
-
+  _General Ideas:_ 
+  
+> Warn is basically items that should have attention payed to.
+> Warn is used for 4XX (*400 errors*), items/operations on their way to a 'threshold', and potentially anything else that may need attention before something mayhaps hit a critical state
+ _Logged File Example Content:_
+  
+```
+  {
+    "timestamp": "2017-06-16 16:13:11",
+    "level": "warn",
+    "message": "Can not find Uber Document"
+    "records": null,
+    "data": {
+      "uberDocument": {
+        "id": "98765-7890-edcba-fghij"
+      }
+    },
+    "user": {
+      "email": "uberuser@akirix.com",
+      "id": "4321-cdeb-32as-f922b"
+    },
+    "file": "controllers/uber_documents.js",
+    "function": "view( req, res, next )",
+    "id": "987654321abcdefghijk"
+  }
+```
 
 ### Error Log Structure 
 
