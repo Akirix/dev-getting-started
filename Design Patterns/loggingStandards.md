@@ -43,7 +43,7 @@
   {
     "timestamp": "2017-06-16 16:13:11",
     "level": "debug",
-    "message": "Querying for account"
+    "message": "Debug: Querying for account"
     "records": null,
     "data": {
       "account": {
@@ -68,7 +68,7 @@
   {
     "timestamp": "2017-06-16 16:13:11",
     "level": "info",
-    "message": "Successful query for account"
+    "message": "Info: Successful query for account"
     "records": [
       {
         "id": "123432-kfsja-293dk-23jkla",
@@ -107,7 +107,7 @@
   {
     "timestamp": "2017-06-16 16:13:11",
     "level": "warn",
-    "message": "Can not find Uber Document"
+    "message": "Warning: Can not find Uber Document"
     "records": null,
     "data": {
       "uberDocument": {
@@ -139,7 +139,7 @@
     "level": "error",
     "endpoint": "/fees/:fee_id",
     "httpMethod": "PUT",
-    "message": "uncaughtException: Validation of Fee failed, Wire must have a default value",
+    "message": "Error: uncaughtException - Validation of Fee failed, Wire must have a default value",
     "records": null,
     "data": {
       "fee": {
