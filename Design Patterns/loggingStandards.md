@@ -310,8 +310,8 @@
     ],
     "ip": "75.148.97.234",
     "user": null,
-    "file": "controllers/uber_tokens.js",
-    "function": "loginCredentials( req, res, next )",
+    "file": "config/ratelimit.js",
+    "function": "limitLow( req, res, next )",
     "id": "324jkadfj29123k"
   }
 ```
