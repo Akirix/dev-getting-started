@@ -216,7 +216,59 @@
 
 
 ### Critical Log Structure 
+  _General Ideas:_ 
+  
+> Critical is used to represent vitally important issues.
+> This could be things like maybe a save on a database failed.
+> Critical should return as much info as possible.
 
+ _Logged File Example Content:_
+  
+```
+  {
+    "timestamp": "2017-06-16 16:13:11",
+    "level": "critical",
+    "endpoint": "/institutionUsers",
+    "httpMethod": "POST",
+    "message": "Critical: Failed To Save Record",
+    "records": null,
+    "data": {
+      "institutionUser":{
+        "email":"personawesomeemail@company.com",
+        "first_name":"PersonFirstName",
+        "last_name":"PersonLastName",
+        "company_id":"33bf6590-d59d-11e3-a0a6-5317e33d8803",
+        "phone_mobile":"8018675309",
+        "status":null
+      }
+    },
+    "callStack": [
+      "File: /Users/yourusername/Dev/uber-api/lib/akx.util.js:27",
+      "Error at Object.exports.log (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:186:23)",
+      "at Object.exports.critical (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:246:11)",
+      "at Object.exports.handleError (/Users/yourusername/Dev/uber-api/lib/akx.util.js:27:12)",
+      "at Object.exports.handleError (/Users/yourusername/Dev/uber-api/controllers/institution_users.js:62:10)",
+      "at /Users/yourusername/Dev/uber-api/controllers/institution_users.js:490:19",
+      "at tryCatch1 (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/util.js:64:19)",
+      "at Promise$_callHandler [as _callHandler] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:708:13)",
+      "at Promise$_settlePromiseFromHandler [as _settlePromiseFromHandler] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:724:18)",
+      "at Promise$_settlePromiseAt [as _settlePromiseAt] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:896:14)",
+      "at Promise$_rejectPromises [as _rejectPromises] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:1033:14)",
+      "at Async$_consumeFunctionBuffer [as _consumeFunctionBuffer] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/async.js:64:12)",
+      "at Async$consumeFunctionBuffer (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/async.js:37:14)",
+      "at nextTickCallbackWith0Args (node.js:489:9)",
+      "at process._tickDomainCallback (node.js:459:13)"
+    ],
+    "ip": "75.148.97.234",
+    "user": {
+      "email": "uberuser@akirix.com",
+      "id": "4321-cdeb-32as-f922b"
+    },
+    "file": "controllers/institution_users.js",
+    "function": "create( req, res, next )",
+    "id": "b932dk9234920ka12"
+  }
+```
 
 
 ### Security Log Structure 
