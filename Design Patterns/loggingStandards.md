@@ -196,7 +196,7 @@
     }
     },
     "callStack": [
-       "File: /Users/yourusername/Dev/uber-api/lib/akx.util.js:27",
+      "File: /Users/yourusername/Dev/uber-api/lib/akx.util.js:27",
       "Error at Object.exports.log (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:186:23)",
       "at Object.exports.error (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:246:11)",
       "at Object.exports.handleError (/Users/yourusername/Dev/uber-api/lib/akx.util.js:27:12)",
