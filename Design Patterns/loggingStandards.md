@@ -196,11 +196,21 @@
     }
     },
     "callStack": [
-      "Error: Wire must have a default value", 
-      "at Error (native)", 
+       "File: /Users/yourusername/Dev/uber-api/lib/akx.util.js:27",
+      "Error at Object.exports.log (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:186:23)",
+      "at Object.exports.error (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:246:11)",
+      "at Object.exports.handleError (/Users/yourusername/Dev/uber-api/lib/akx.util.js:27:12)",
       "at Object.<anonymous> (/Users/yourusername/Dev/uber-api/controllers/fees.js:117:17)",
       "at Object.<anonymous> (/Users/yourusername/Dev/uber-api/models_uber/fee.js:233:29)",
-      "at Module._compile (module.js:409:26)"
+      "at tryCatch1 (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/util.js:64:19)",
+      "at Promise$_callHandler [as _callHandler] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:708:13)",
+      "at Promise$_settlePromiseFromHandler [as _settlePromiseFromHandler] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:724:18)",
+      "at Promise$_settlePromiseAt [as _settlePromiseAt] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:896:14)",
+      "at Promise$_rejectPromises [as _rejectPromises] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/promise.js:1033:14)",
+      "at Async$_consumeFunctionBuffer [as _consumeFunctionBuffer] (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/async.js:64:12)",
+      "at Async$consumeFunctionBuffer (/Users/yourusername/Dev/uber-api/node_modules/sequelize/node_modules/bluebird/js/main/async.js:37:14)",
+      "at nextTickCallbackWith0Args (node.js:489:9)",
+      "at process._tickDomainCallback (node.js:459:13)"
     ],
     "ip": "75.148.97.234",
     "user": {
