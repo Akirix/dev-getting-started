@@ -282,3 +282,36 @@
 
 
 ### Security Log Structure 
+  _General Ideas:_ 
+  
+> Security is it's own entity.
+> Security should be treated to try to capture things like potential brute force attemps (like *429 HTTP Responses*).
+> Security may and may not be based around a given threshold.  
+> Security could be used in conjunction with other logs.
+> Security should always have negative connotation associated with it.
+
+ _Logged File Example Content:_
+  
+```
+  {
+    "timestamp": "2017-06-16 16:13:11",
+    "level": "critical",
+    "endpoint": "/uberTokens",
+    "httpMethod": "POST",
+    "message": "Security: Potential brute force",
+    "records": null,
+    "data": {
+      "email":"personawesomeemail@company.com",
+      "password": "trying@llP@zz4urds"
+    },
+    "callStack": [
+      "Error: Too Many Requests",
+      "at Object.exports.AkxRateLimit (/Users/yourusername/Dev/uber-api/config/ratelimit.js:50:9)
+    ],
+    "ip": "75.148.97.234",
+    "user": null,
+    "file": "controllers/uber_tokens.js",
+    "function": "loginCredentials( req, res, next )",
+    "id": "324jkadfj29123k"
+  }
+```
