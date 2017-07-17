@@ -30,3 +30,37 @@ Brew will install / upgrade to the latest but you still may need to use the othe
     source ~/.zshrc;
 ```
 > To run your elasticsearch for the platform use 'devElastic' to start it, to run elasticsearch for elk stack use brew services to start
+## NOTE: (Logstash)
+- Setting up logstash by using a generic conf:
+```
+    # INPUT SETTINGS
+    input {
+        tcp {
+            port => 28777
+            type => "json"
+            codec => "json"
+        }
+    }
+    #
+    # FILTER SETTINGS
+    #
+    # OUTPUT SETTINGS
+    output {
+        elasticsearch {
+            hosts => ["127.0.0.1:9200"]
+            sniffing => true
+            ssl_certificate_verification => false
+            index => "development_%{+YYYY.MM.dd}"
+        }
+    }
+    #
+```
+```
+    mkdir ~/.local/etc/;
+    touch ~/.local/etc/winstonlogs.conf;
+    // to start logstash
+    // first verify conf
+    logstash -t -f ~/.local/etc/winstonlogs.conf;
+    // then if test passes run:
+    logstash -f ~/.local/etc/winstonlogs.conf;
+```
