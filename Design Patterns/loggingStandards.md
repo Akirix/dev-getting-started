@@ -18,7 +18,7 @@
 | timestamp   | datetime in utc |
 | level       | string (lowercase)          |
 | endpoint    | string          |
-| callStack    | string          |
+| stack    | string          |
 | message    | string          |
 | httpMethod    | string          |
 | ip    | string          |
@@ -27,7 +27,7 @@
 | data    | object, (no restriction on values)        |
 | file    | string          |
 | function    | string          |
-| id    | string          |
+|  requestID   | string          |
   
 
 ### Debug Log Structure
@@ -53,7 +53,7 @@
     },
     "file": "controllers/accounts.js",
     "function": "view( req, res, next )",
-    "id": "012345679abcdefghijk"
+    "requestID": "012345679abcdefghijk"
   }
 ```
   
@@ -91,7 +91,7 @@
     },
     "file": "controllers/accounts.js",
     "function": "view( req, res, next )",
-    "id": "012345679abcdefghijk"
+    "requestID": "012345679abcdefghijk"
   }
 ```
 
@@ -120,7 +120,7 @@
     },
     "file": "controllers/uber_documents.js",
     "function": "view( req, res, next )",
-    "id": "987654321abcdefghijk"
+    "requestID": "987654321abcdefghijk"
   }
 ```
 
@@ -195,7 +195,7 @@
       }
     }
     },
-    "callStack": [
+    "stack": [
       "File: /Users/yourusername/Dev/uber-api/lib/akx.util.js:27",
       "Error at Object.exports.log (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:186:23)",
       "at Object.exports.error (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:246:11)",
@@ -219,7 +219,7 @@
     },
     "file": "controllers/fees.js",
     "function": "update( req, res, next )",
-    "id": "239248asdkj23912"
+    "requestID": "239248asdkj23912"
   }
 ```
 
@@ -252,7 +252,7 @@
         "status":null
       }
     },
-    "callStack": [
+    "stack": [
       "File: /Users/yourusername/Dev/uber-api/lib/akx.util.js:27",
       "Error at Object.exports.log (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:186:23)",
       "at Object.exports.critical (/Users/yourusername/Dev/uber-api/lib/akx.logger.js:246:11)",
@@ -276,7 +276,7 @@
     },
     "file": "controllers/institution_users.js",
     "function": "create( req, res, next )",
-    "id": "b932dk9234920ka12"
+    "requestID": "b932dk9234920ka12"
   }
 ```
 
@@ -304,7 +304,7 @@
       "email":"personawesomeemail@company.com",
       "password": "trying@llP@zz4urds"
     },
-    "callStack": [
+    "stack": [
       "Error: Too Many Requests",
       "at Object.exports.AkxRateLimit (/Users/yourusername/Dev/uber-api/config/ratelimit.js:50:9)
     ],
@@ -312,6 +312,6 @@
     "user": null,
     "file": "config/ratelimit.js",
     "function": "limitLow( req, res, next )",
-    "id": "324jkadfj29123k"
+    "requestID": "324jkadfj29123k"
   }
 ```
