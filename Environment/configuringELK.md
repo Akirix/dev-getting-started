@@ -17,7 +17,7 @@
    brew upgrade elasticsearch; brew upgrade logstash; brew upgrade kibana;
 ```
 ## NOTE:
-- ELASTICSEARCH, we need 1.5.0 for our api functionality, but the newer version of logstash and kibana require a more recent version
+- ELASTICSEARCH, we need 1.5.0 for our AML API functionality, but the newer version of logstash and kibana require a more recent version
 > Caveat: 
 - Use one while the other is off, vise-versa
 Brew will install / upgrade to the latest but you still may need to use the other
